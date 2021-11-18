@@ -1,0 +1,11 @@
+README.md
+setup.py
+datafabric_fb/__init__.py
+datafabric_fb/datafabric.py
+dataprocessing_fb/__init__.py
+dataprocessing_fb/dataprocessing.py
+datascience.egg-info/PKG-INFO
+datascience.egg-info/SOURCES.txt
+datascience.egg-info/dependency_links.txt
+datascience.egg-info/requires.txt
+datascience.egg-info/top_level.txt
