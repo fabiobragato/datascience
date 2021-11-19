@@ -3,7 +3,7 @@ from setuptools import find_packages, setup
 setup(
     name='datascience',
     packages=find_packages(include=['dataprocessing_fb', 'datafabric_fb']),
-    version='0.2.0',
+    version='0.2.1',
     description='Tools for Data Science',
     author='Fabio Bragato',
     author_email='fabio_bragato@hotmail.com',
