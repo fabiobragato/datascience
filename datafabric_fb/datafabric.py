@@ -106,3 +106,34 @@ def create_variables_in_time(df, dateid, id, operation, time, support_var, filet
         dfList.clear()
     
     print('Process Finished')
+
+def create_support_target_variables(dataframe, window, dateid, id, var):
+    
+    # Create the range for look in the future and past based on window 
+    window_range = list(range(-window, window + 1, 1))
+    
+    # Remove 0 due to don't look for actual variables
+    window_range.remove(0)
+    
+    for item in window_range:
+        print(f'Creating: {abs(item)}{"m" if item < 0 else "p"}')
+        
+        # Create a support column in the original dataframe to merge in future step
+        dataframe[f'{dateid}_{abs(item)}{"m" if item < 0 else "p"}'] = dataframe[dateid].apply(lambda x: x + relativedelta(months=item))
+        
+        # Dataframe support to armazenate dateid, id and var
+        df_support = dataframe[[dateid, id, var]]
+        
+        # Rename columns
+        df_support.rename(columns={
+                                    var: f'{var}_{abs(item)}{"m" if item < 0 else "p"}',
+                                    dateid: f'{dateid}_{abs(item)}{"m" if item < 0 else "p"}'}, inplace=True)
+        
+        # Merge Original dataframe with support dataframe based on support column create previously
+        dataframe = pd.merge(dataframe, df_support, how='left', on=[id, f'{dateid}_{abs(item)}{"m" if item < 0 else "p"}'])
+        
+        # Drop support column (it doesn't matter for data)
+        dataframe.drop(f'{dateid}_{abs(item)}{"m" if item < 0 else "p"}', axis=1, inplace=True)
+        
+    print('Process Finished')
+    return dataframe
