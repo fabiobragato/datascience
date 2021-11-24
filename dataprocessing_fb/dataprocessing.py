@@ -31,7 +31,7 @@ def selectCatVar(dataframe):
     # Find only categorical variables
     return list(dataframe.select_dtypes('object').columns)
 
-def separete_data_on_time_for_ml(dataframe, dateid, id, frac_dateid, frac_id, random_seed = ""):
+def separate_data_on_time_for_ml(dataframe, dateid, id, frac_dateid, frac_id, random_seed = ""):
     
     # Separates dateid and id inside tuples and armazenate it in a pd.Series
     data = pd.Series([tuple(x) for x in dataframe[np.append(dateid, id)].to_numpy()])
